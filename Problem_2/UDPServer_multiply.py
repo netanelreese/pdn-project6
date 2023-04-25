@@ -16,6 +16,17 @@ while True:
     # decode the byte string to a string object using the UTF-8 format
     message = messageBytes.decode("utf-8")
     print(f'message from {clientIP}:{clientPort} = {message}')
-    # Send a message encoded in the UTF-8 format through the socket
-    modifiedMessage = message.upper()
+    try:
+            num_list = [int(num) for num in message.split(",")]
+    except ValueError:
+            # If message is not a list of integers, send "invalid input"
+        serverSocket.sendto("invalid input".encode("utf-8"), clientAddress)
+        continue
+
+        # Calculate the product of the list and send it back
+    product = 1
+    for num in num_list:
+        product *= num
+
+    modifiedMessage = str(product)
     serverSocket.sendto(modifiedMessage.encode("utf-8"), clientAddress)

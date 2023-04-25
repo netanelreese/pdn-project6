@@ -5,7 +5,7 @@ clientSocket = socket(AF_INET, SOCK_DGRAM)
 # Binding a socket is optional on the client side
 clientSocket.bind(('127.0.0.1', 10000))
 # Input a message and encode it to a byte string in the UTF-8 format
-message = input('Input lowercase sentence:')
+message = input('Input list of comma seperated integers (eg. "1, 2, 3,..."):')
 messageBytes = message.encode("utf-8")
 # Send a message through the client socket
 # The destination is specified by a tuple of IP and port
