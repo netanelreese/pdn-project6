@@ -1,13 +1,16 @@
+
 from socket import *
-serverName = '156.110.247.18'
-serverPort = 80
+# Create a TCP socket
 clientSocket = socket(AF_INET, SOCK_STREAM)
-clientSocket.connect((serverName, serverPort))
-request = "GET / HTTP/1.1\r\nHost: 156.110.247.18\r\n\r\n"
-print("Send the request:")
-print(request)
-clientSocket.send(request.encode())
-print("From the Server:");
-response = clientSocket.recv(1024)
-print(response.decode())
+# Connect to a server process using a tuple of IP and port
+serverIP = '127.0.0.1'
+serverPort = 12345
+serverAddress = (serverIP, serverPort)
+clientSocket.connect(serverAddress)
+# Send a byte string to the client socket
+message = input('Input lowercase sentence:')
+clientSocket.send(message.encode("utf-8"))
+# Receive a byte string from the client socket
+modifiedMessageBytes = clientSocket.recv(1024)
+print('From Server: ', modifiedMessageBytes.decode("utf-8"))
 clientSocket.close()

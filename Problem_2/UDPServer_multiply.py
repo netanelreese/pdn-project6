@@ -2,17 +2,20 @@
 from socket import *
 # Create a UDP socket
 serverSocket = socket(AF_INET, SOCK_DGRAM)
-# Bind the socket to port 12000
-serverPort = 12000
-serverSocket.bind(('', serverPort))
+# Bind the socket to the local IP and port 12345
+serverIP = '127.0.0.1'
+serverPort = 12345
+serverAddress = (serverIP, serverPort);
+serverSocket.bind(serverAddress)
 print('The server is ready to receive')
 while True:
-    # Receive a message from the socket
+    # Receive a byte string up to 2048 bytes long from the socket
     # The sender address is attached with the message
-    message, clientAddress = serverSocket.recvfrom(2048)
+    messageBytes, clientAddress = serverSocket.recvfrom(2048)
     clientIP, clientPort = clientAddress
-    print(f'message from {clientIP}:{clientPort} = {message.decode()}')
-    replyMessage = input('Type a message to reply:')
-    # Send a message through the socket
-    # The destination address is provided
-    serverSocket.sendto(replyMessage.encode(), clientAddress)
+    # decode the byte string to a string object using the UTF-8 format
+    message = messageBytes.decode("utf-8")
+    print(f'message from {clientIP}:{clientPort} = {message}')
+    # Send a message encoded in the UTF-8 format through the socket
+    modifiedMessage = message.upper()
+    serverSocket.sendto(modifiedMessage.encode("utf-8"), clientAddress)
