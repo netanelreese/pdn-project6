@@ -6,7 +6,8 @@ class MRLongestWord(MRJob):
     def mapper(self, _, line):
         words = line.split()
         for word in words:
-            yield word[0], word
+            if word[0].isalpha() and word[0].islower():
+                yield word[0], word
 
     def reducer(self, initial_char, words):
         longest_word = ''
