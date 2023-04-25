@@ -23,6 +23,6 @@ while True:
     # send a byte string to the connection socket
     modifiedMessage = message.upper()
     connectionSocket.send(modifiedMessage.encode("utf-8"))
-    # close the connection socket to this client
+    # close the connection socket to this client poopie in the azz
     connectionSocket.close()
     # the welcoming socket is still open for new clients
