@@ -8,7 +8,7 @@ serverPort = 12345
 serverAddress = (serverIP, serverPort)
 clientSocket.connect(serverAddress)
 # Send a byte string to the client socket
-message = input('Input lowercase sentence:')
+message = input('Input list of comma seperated integers (eg. "1, 2, 3,..."):')
 clientSocket.send(message.encode("utf-8"))
 # Receive a byte string from the client socket
 modifiedMessageBytes = clientSocket.recv(1024)
